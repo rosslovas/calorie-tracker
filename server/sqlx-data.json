@@ -1,0 +1,649 @@
+{
+  "db": "PostgreSQL",
+  "011e62bcc4ad653748efe4b7dbe809b5f7ae0783e8565ab06a8790c374b759b4": {
+    "query": "\n            SELECT\n                \"id\",\n                \"name\",\n                \"deleted\",\n                \"created_on\"\n            FROM ingredient_groups\n            WHERE NOT \"deleted\"\n            ORDER BY \"created_on\" DESC\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "name",
+          "type_info": "Text"
+        },
+        {
+          "ordinal": 2,
+          "name": "deleted",
+          "type_info": "Bool"
+        },
+        {
+          "ordinal": 3,
+          "name": "created_on",
+          "type_info": "Timestamptz"
+        }
+      ],
+      "parameters": {
+        "Left": []
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "10ac8872666b690e3df30f1ff44b5b17a10f616f85775a61b383e3c7c5a14375": {
+    "query": "UPDATE ingredient_group_ingredients SET deleted_on = now() WHERE ingredient_group_id = $1",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "24471b16e0c3a8b015368830e09387bd23e1618df532c57f8de7e84e06fbf005": {
+    "query": "\n            SELECT\n                \"id\",\n                \"name\",\n                \"deleted\",\n                \"created_on\"\n            FROM ingredient_groups\n            WHERE \"id\" = ANY($1)\n            ORDER BY \"created_on\" DESC\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "name",
+          "type_info": "Text"
+        },
+        {
+          "ordinal": 2,
+          "name": "deleted",
+          "type_info": "Bool"
+        },
+        {
+          "ordinal": 3,
+          "name": "created_on",
+          "type_info": "Timestamptz"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4Array"
+        ]
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "24f43efb712482f4caabab76fbe68fc2296e30c68b95e5e258e507161524d6dd": {
+    "query": "\n                    SELECT\n                        \"id\",\n                        \"name\",\n                        \"energy_per_gram\",\n                        \"protein_per_gram\",\n                        \"fat_per_gram\",\n                        \"carbs_per_gram\",\n                        \"sugar_per_gram\",\n                        \"price_cents\",\n                        \"weight_grams\",\n                        \"deleted\",\n                        \"created_on\"\n                    FROM ingredients\n                    WHERE NOT \"deleted\"\n                    ORDER BY \"created_on\" DESC\n                ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "name",
+          "type_info": "Text"
+        },
+        {
+          "ordinal": 2,
+          "name": "energy_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 3,
+          "name": "protein_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 4,
+          "name": "fat_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 5,
+          "name": "carbs_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 6,
+          "name": "sugar_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 7,
+          "name": "price_cents",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 8,
+          "name": "weight_grams",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 9,
+          "name": "deleted",
+          "type_info": "Bool"
+        },
+        {
+          "ordinal": 10,
+          "name": "created_on",
+          "type_info": "Timestamptz"
+        }
+      ],
+      "parameters": {
+        "Left": []
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    }
+  },
+  "58c291853d65366555d642db3a60b477ca5608c44c30f3cc83f07e2c0f298f9f": {
+    "query": "\n            INSERT INTO recipes (\n                \"name\"\n            )\n            VALUES ($1)\n            RETURNING id\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Text"
+        ]
+      },
+      "nullable": [
+        false
+      ]
+    }
+  },
+  "6538189911d0a3e6fad73fe99a5b0b7f3f7cdacdb3817f488bab71930b20e4ca": {
+    "query": "\n                        INSERT INTO recipe_ingredients (\n                            \"recipe_id\",\n                            \"ingredient_id\",\n                            \"weight_grams\"\n                        )\n                        VALUES ($1, $2, $3)\n                    ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4",
+          "Int4",
+          "Int4"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "66307502d519ff03da8f523fb706b3e3c164a75cb9a514d855060a6a9db0ada5": {
+    "query": "\n                        INSERT INTO recipe_ingredient_groups (\n                            \"recipe_id\",\n                            \"ingredient_group_id\",\n                            \"weight_grams\"\n                        )\n                        VALUES ($1, $2, $3)\n                    ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4",
+          "Int4",
+          "Int4"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "91a984ac18aae664da89deb6ef0bb88b3f0b07ec45209d00c1a6880c616f9971": {
+    "query": "\n                UPDATE ingredients SET \"name\" = $2\n                WHERE \"id\" = $1 AND NOT \"deleted\"\n            ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4",
+          "Text"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "9822a0ad9fe9dc3db16ff88eb1e011fd56671e246853bc33e6189d4b99f16181": {
+    "query": "\n                        INSERT INTO ingredient_group_ingredients (\n                            \"ingredient_group_id\",\n                            \"ingredient_id\",\n                            \"weight_grams\"\n                        )\n                        VALUES ($1, $2, $3)\n                    ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4",
+          "Int4",
+          "Int4"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "a0163ca507e57bdc79c6d7d2f2e3695ce9cd38e42b3281fe3132074fe197e316": {
+    "query": "UPDATE ingredient_groups SET deleted_on = now() WHERE id = $1",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "a2d33cea14e106423f6b84d61a46b8d0f111d77ef4bd0a71c01798eb25da4482": {
+    "query": "\n            SELECT\n                \"id\",\n                \"name\"\n            FROM recipes\n            WHERE NOT \"deleted\"\n            ORDER BY \"created_on\" DESC\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "name",
+          "type_info": "Text"
+        }
+      ],
+      "parameters": {
+        "Left": []
+      },
+      "nullable": [
+        false,
+        false
+      ]
+    }
+  },
+  "ac1187be0e6d19081b856d0e418e4de08fbb6b7bd64d37c47f7a1f0201ff6430": {
+    "query": "UPDATE recipes SET deleted_on = now() WHERE id = $1",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "b437b6524ca61d96c3610327f85ab1f497db5bd4ea05a06c1afcb0d3bc25a083": {
+    "query": "\n            SELECT\n                \"id\",\n                \"recipe_id\",\n                \"ingredient_id\",\n                \"weight_grams\"\n            FROM recipe_ingredients\n            WHERE \"recipe_id\" = ANY($1)\n            ORDER BY \"created_on\" DESC\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "recipe_id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 2,
+          "name": "ingredient_id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 3,
+          "name": "weight_grams",
+          "type_info": "Int4"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4Array"
+        ]
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "b63d6712ce188caa56325e6c4fdc02277c413f85345e6754b6c8e8d0614f09bd": {
+    "query": "\n            UPDATE recipes SET \"name\" = $2\n            WHERE \"id\" = $1 AND NOT \"deleted\"\n        ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4",
+          "Text"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "b66091e2dba920e50ff8e44aadd07739b8142b404975d6f2ad975a5ef4107226": {
+    "query": "\n            SELECT\n                \"id\",\n                \"recipe_id\",\n                \"ingredient_group_id\",\n                \"weight_grams\"\n            FROM recipe_ingredient_groups\n            WHERE \"recipe_id\" = ANY($1)\n            ORDER BY \"created_on\" DESC\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "recipe_id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 2,
+          "name": "ingredient_group_id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 3,
+          "name": "weight_grams",
+          "type_info": "Int4"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4Array"
+        ]
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "c12ef57a01b50e4bf504618369b65b9c95ad6af2dd97cc99295d465cc8178d69": {
+    "query": "\n                    INSERT INTO ingredients (\n                        \"name\",\n                        \"energy_per_gram\",\n                        \"protein_per_gram\",\n                        \"fat_per_gram\",\n                        \"carbs_per_gram\",\n                        \"sugar_per_gram\",\n                        \"price_cents\",\n                        \"weight_grams\"\n                    )\n                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)\n                    RETURNING id\n                ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Text",
+          "Numeric",
+          "Numeric",
+          "Numeric",
+          "Numeric",
+          "Numeric",
+          "Int4",
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false
+      ]
+    }
+  },
+  "c72af13107d982e70557e105a32515a3efc40dc1b9fa29e659b6e57615a873b4": {
+    "query": "UPDATE ingredients SET deleted_on = now() WHERE id = $1",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "c8d772989efc5df257dd80f6b79eb39ce20cbcce4f4ecb35490b9f439428c7ae": {
+    "query": "\n            SELECT\n                \"id\",\n                \"ingredient_group_id\",\n                \"ingredient_id\",\n                \"weight_grams\"\n            FROM ingredient_group_ingredients\n            WHERE \"ingredient_group_id\" = ANY($1)\n            ORDER BY \"created_on\" DESC\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "ingredient_group_id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 2,
+          "name": "ingredient_id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 3,
+          "name": "weight_grams",
+          "type_info": "Int4"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4Array"
+        ]
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "cb8511ba499087d407df95e306035466eb49095c9cfb1e8d097fef9e1b9371a8": {
+    "query": "\n            SELECT\n                \"id\",\n                \"name\",\n                \"energy_per_gram\",\n                \"protein_per_gram\",\n                \"fat_per_gram\",\n                \"carbs_per_gram\",\n                \"sugar_per_gram\",\n                \"price_cents\",\n                \"weight_grams\",\n                \"deleted\",\n                \"created_on\"\n            FROM ingredients\n            WHERE NOT \"deleted\"\n                OR (\"deleted\" AND \"id\" = ANY($1))\n            ORDER BY \"created_on\" DESC\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "name",
+          "type_info": "Text"
+        },
+        {
+          "ordinal": 2,
+          "name": "energy_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 3,
+          "name": "protein_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 4,
+          "name": "fat_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 5,
+          "name": "carbs_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 6,
+          "name": "sugar_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 7,
+          "name": "price_cents",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 8,
+          "name": "weight_grams",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 9,
+          "name": "deleted",
+          "type_info": "Bool"
+        },
+        {
+          "ordinal": 10,
+          "name": "created_on",
+          "type_info": "Timestamptz"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4Array"
+        ]
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    }
+  },
+  "d89ea38d90ebf907e9901a4c505ef4290e2314800e134228f90dac81e0a4b851": {
+    "query": "\n                    INSERT INTO ingredient_groups (\n                        \"name\"\n                    )\n                    VALUES ($1)\n                    RETURNING id\n                ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Text"
+        ]
+      },
+      "nullable": [
+        false
+      ]
+    }
+  },
+  "e69690c6f818786fae454b32af0ef981bebe2ba3e55f3c026a56793914202db9": {
+    "query": "\n                UPDATE ingredient_groups SET \"name\" = $2\n                WHERE \"id\" = $1 AND NOT \"deleted\"\n            ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Int4",
+          "Text"
+        ]
+      },
+      "nullable": []
+    }
+  },
+  "f167c13eebed732a97a4d3162fa174d255f82f9f4f299534e5c378c8ca321f41": {
+    "query": "\n            SELECT\n                \"id\",\n                \"name\",\n                \"energy_per_gram\",\n                \"protein_per_gram\",\n                \"fat_per_gram\",\n                \"carbs_per_gram\",\n                \"sugar_per_gram\",\n                \"price_cents\",\n                \"weight_grams\",\n                \"deleted\",\n                \"created_on\"\n            FROM ingredients\n            WHERE \"id\" = ANY($1)\n            ORDER BY \"created_on\" DESC\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 1,
+          "name": "name",
+          "type_info": "Text"
+        },
+        {
+          "ordinal": 2,
+          "name": "energy_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 3,
+          "name": "protein_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 4,
+          "name": "fat_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 5,
+          "name": "carbs_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 6,
+          "name": "sugar_per_gram",
+          "type_info": "Numeric"
+        },
+        {
+          "ordinal": 7,
+          "name": "price_cents",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 8,
+          "name": "weight_grams",
+          "type_info": "Int4"
+        },
+        {
+          "ordinal": 9,
+          "name": "deleted",
+          "type_info": "Bool"
+        },
+        {
+          "ordinal": 10,
+          "name": "created_on",
+          "type_info": "Timestamptz"
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4Array"
+        ]
+      },
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    }
+  }
+}
